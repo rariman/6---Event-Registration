@@ -21,7 +21,6 @@
 
 <script setup>
     import RoundButton from './RoundButton.vue';
-    import RoundedCard from './RoundedCard.vue';
     import SectionCard from './SectionCard.vue';
 
     defineProps({
