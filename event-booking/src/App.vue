@@ -13,16 +13,22 @@
     </section>
     <h2 class="text-2x1 font-medium">Your Bookings</h2>
     <section class="grid grid-cols-1 gap-8">
-      <BookingItem v-for="booking in bookings" :key="booking.id"/>
+      <template v-if="!bookingsLoading">
+        <BookingItem v-for="booking in bookings" :key="booking.id"/>
+      </template>
+      <template v-else>
+        <LoadingBookingItem v-for="i in 4" :key="i"/>
+      </template>
     </section>
   </main>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, Teleport } from 'vue';
 import BookingItem from './components/BookingItem.vue';
 import EventCard from './components/EventCard.vue';
 import LoadingEventCard from './components/LoadingEventCard.vue';
+import LoadingBookingItem from './components/LoadingBookingItem.vue';
 
 const events = ref([])
 const bookings = ref([])
@@ -62,12 +68,12 @@ const handleRegistration = async (event) =>{
     eventTitle: event.title
   }
 
-  await fetch('http://localhost:3001/booking', {
+  await fetch('http://localhost:3001/bookings', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(...newBooking)
+    body: JSON.stringify({...newBooking, status:'confirmed'})
   })
 }
 
