@@ -12,18 +12,18 @@
 
 
 <script setup>
-import { computed } from 'vue';
-import RoundButton from './RoundButton.vue';
-import SectionCard from './SectionCard.vue';
-import { LoaderCircle, Check  } from 'lucide-vue-next';
+    import { computed } from 'vue';
+    import RoundButton from './RoundButton.vue';
+    import SectionCard from './SectionCard.vue';
+    import { LoaderCircle, Check  } from 'lucide-vue-next';
 
-const props = defineProps({
-    title: String,
-    status: String
-})
+    const props = defineProps({
+        title: String,
+        status: String
+    })
 
-const pending = computed(() => props.status === 'pending')
-const icon = computed(() => pending.value ? LoaderCircle : Check)
+    const pending = computed(() => props.status === 'pending')
+    const icon = computed(() => pending.value ? LoaderCircle : Check)
 
-defineEmits(['cancelled'])
+    defineEmits(['cancelled'])
 </script>
